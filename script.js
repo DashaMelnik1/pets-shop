@@ -103,9 +103,8 @@ function makingProductCardInTemplate(title, description, img, price, tags) {
     return myCard
 }
 
-
 const searchButton = document.querySelector("#search-btn");
-const searchInput = document.querySelector("#search-input")
+const searchInput = document.querySelector("#search-input");
 const nothingFound = document.querySelector("#nothing-found");
 let currentState = [...items];
 
@@ -125,8 +124,15 @@ renderItems(currentState);
 function applySearch() {
     const searchString = searchInput.value.trim().toLowerCase();
     currentState = items.filter((el) => el.title.toLowerCase().includes(searchString));
+    searchInput.value = '';
     renderItems(currentState);
-
 }
+
+function sendByKey(event) {
+    if (event.key == 'Enter') {
+        applySearch();
+    }
+}
+
 searchButton.addEventListener("click", applySearch);
-searchInput.addEventListener("search", applySearch);
+searchInput.addEventListener("keyup", sendByKey);
